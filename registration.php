@@ -86,55 +86,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
 
     <section id="registrasi" class="container mt-5">
-        <h2 class="text-center mb-4">Daftar Beasiswa</h2>
-        <h3>Registrasi Beasiswa</h3>
-        <form action="process_registration.php" method="post">
+    <h2 class="text-center mb-4">Daftar Beasiswa</h2>
+    <h3>Registrasi Beasiswa</h3>
+    <form action="process_registration.php" method="post">
+        <div class="form-group">
+            <label for="nama">Masukkan Nama:</label>
+            <input type="text" class="form-control" id="nama" name="nama" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Masukkan Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="nomor_hp">Masukkan Nomor HP:</label>
+            <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp" required>
+        </div>
+        <div class="form-group">
+            <label for="semester">Pilih Semester Saat Ini:</label>
+            <select class="form-control" id="semester" name="semester" required>
+                <option value="">Pilih Semester</option>
+                <?php
+                for ($i = 1; $i <= 8; $i++) {
+                    echo "<option value='$i'>$i</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <!-- ... Form fields for registration ... -->
+        <?php
+        $ipk = 3.5; // IPK yang diasumsikan
+        if ($ipk >= 3) {
+            echo '
             <div class="form-group">
-                <label for="nama">Masukkan Nama:</label>
-                <input type="text" class="form-control" id="nama" name="nama" required>
+                <label for="ipk">IPK:</label>
+                <input type="text" class="form-control" id="ipk" name="ipk" value="' . $ipk . '" readonly>
             </div>
             <div class="form-group">
-                <label for="email">Masukkan Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="nomor_hp">Masukkan Nomor HP:</label>
-                <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp" required>
-            </div>
-            <div class="form-group">
-                <label for="semester">Pilih Semester Saat Ini:</label>
-                <select class="form-control" id="semester" name="semester" required>
-                    <option value="">Pilih Semester</option>
-                    <?php
-                    for ($i = 1; $i <= 8; $i++) {
-                        echo "<option value='$i'>$i</option>";
-                    }
-                    ?>
+                <label for="pilihan_beasiswa">Pilih Jenis Beasiswa:</label>
+                <select class="form-control" id="pilihan_beasiswa" name="pilihan_beasiswa" required>
+                    <option value="">Pilih Jenis Beasiswa</option>
+                    <option value="akademik">Beasiswa Akademik</option>
+                    <option value="non-akademik">Beasiswa Non-Akademik</option>
                 </select>
             </div>
-            <?php
-            $ipk = 3; // IPK yang diasumsikan
-            if ($ipk >= 3) {
-                echo '<div class="form-group">
-                        <label for="pilihan_beasiswa">Pilih Jenis Beasiswa:</label>
-                        <select class="form-control" id="pilihan_beasiswa" name="pilihan_beasiswa" required>
-                            <option value="">Pilih Jenis Beasiswa</option>
-                            <option value="akademik">Beasiswa Akademik</option>
-                            <option value="non-akademik">Beasiswa Non-Akademik</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="berkas_syarat">Upload Berkas Syarat:</label>
-                        <input type="file" class="form-control-file" id="berkas_syarat" name="berkas_syarat">
-                    </div>';
-            } else {
-                echo '<p class="text-danger">Maaf, Anda tidak memenuhi syarat untuk pendaftaran beasiswa.</p>';
-            }
-            ?>
-            <button type="submit" class="btn btn-primary">Daftar</button>
-            <a href="#" class="btn btn-secondary">Batal</a>
-        </form>
-    </section>
+            <div class="form-group">
+                <label for="berkas_syarat">Upload Berkas Syarat:</label>
+                <input type="file" class="form-control-file" id="berkas_syarat" name="berkas_syarat">
+            </div>';
+        } else {
+            echo '<p class="text-danger">Maaf, Anda tidak memenuhi syarat untuk pendaftaran beasiswa.</p>';
+        }
+        ?>
+        <button type="submit" class="btn btn-primary">Daftar</button>
+        <a href="#" class="btn btn-secondary">Batal</a>
+    </form>
+</section>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
